@@ -1,5 +1,5 @@
-#ifndef SIMPLE_TCA9555_H
-#define SIMPLE_TCA9555_H
+#ifndef SIMPLETCA9555_H
+#define SIMPLETCA9555_H
 
 #include <Arduino.h>
 #include <Wire.h>
