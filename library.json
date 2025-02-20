@@ -5,8 +5,7 @@
     "keywords": "TCA9555, I2C, interrupt, input, ESP32, 16-bit",
     "authors": [
         {
-            "name": "Matt Friskey",
-            "email": "matt@friskeycloud.us",
+            "name": "Matthew Friskey",
             "maintainer": true
         }
     ],
