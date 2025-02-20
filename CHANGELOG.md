@@ -2,6 +2,14 @@
 
 All notable changes to the `SimpleTCA9555` library will be documented in this file.
 
+## [2.0.0] - 2025-02-20
+
+### Changed
+- **Breaking Change**: Replaced input methods (`input_1()` to `input_16()`) with public boolean variables (`input_1` to `input_16`). This allows variable-like syntax (e.g., `if (reed_switch)` after `#define reed_switch expander.input_1`). Users of v1.x.x must update their code from `expander.input_X()` to `expander.input_X`.
+
+### Notes
+- This major update improves readability by enabling direct variable access instead of method calls. Existing code using v1.x.x will need adjustment.
+
 ## [1.1.1] - 2025-02-20
 
 ### Changed
