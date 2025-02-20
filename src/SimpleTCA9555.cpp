@@ -6,7 +6,7 @@ SimpleTCA9555::SimpleTCA9555(uint8_t address) : _address(address), _inputs(0), _
     instance = this;
 }
 
-void SimpleTCA9555::begin(int sda, int scl, int interruptPin) {
+void SimpleTCA9555::begin(int sda, int scl, int interruptPin, uint32_t clockSpeed) {
     _interruptPin = interruptPin;
 
     if (sda != -1 && scl != -1) {
@@ -14,6 +14,8 @@ void SimpleTCA9555::begin(int sda, int scl, int interruptPin) {
     } else {
         Wire.begin();
     }
+
+    Wire.setClock(clockSpeed); // Set I2C clock speed
 
     Wire.beginTransmission(_address);
     Wire.write(0x06);
@@ -38,7 +40,7 @@ void SimpleTCA9555::update() {
     uint8_t port0 = Wire.read(); // P00-P07
     uint8_t port1 = Wire.read(); // P10-P17
 
-    _inputs = (port1 << 8) | port0; // Full 16 bits: P00-P07 in 0-7, P10-P17 in 8-15
+    _inputs = (port1 << 8) | port0; // Full 16 bits
 }
 
 void SimpleTCA9555::updateFromISR() {
