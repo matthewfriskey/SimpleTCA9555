@@ -11,12 +11,28 @@
  * This library supports reading all 16 inputs (P00-P07 on Port 0, P10-P17 on Port 1).
  * Inputs are defined as `input_1` to `input_16` and can be redefined in your sketch
  * with custom names using `#define`. It supports optional interrupt-driven updates
- * when the TCA9555's INT pin is connected to an ESP32 GPIO pin.
+ * and adjustable I2C clock speed.
  */
 class SimpleTCA9555 {
 public:
+    /**
+     * @brief Constructor for the SimpleTCA9555 class.
+     * @param address The I2C address of the TCA9555 (typically 0x20 to 0x27).
+     */
     SimpleTCA9555(uint8_t address);
-    void begin(int sda = -1, int scl = -1, int interruptPin = -1);
+
+    /**
+     * @brief Initializes the I2C bus and configures the TCA9555 for input mode.
+     * @param sda The SDA pin for I2C (default: -1 uses ESP32 default SDA pin).
+     * @param scl The SCL pin for I2C (default: -1 uses ESP32 default SCL pin).
+     * @param interruptPin The ESP32 GPIO pin connected to TCA9555 INT (default: -1 disables interrupts).
+     * @param clockSpeed I2C clock speed in Hz (default: 100000, max 400000 for TCA9555).
+     */
+    void begin(int sda = -1, int scl = -1, int interruptPin = -1, uint32_t clockSpeed = 100000);
+
+    /**
+     * @brief Manually updates the internal state by reading all inputs from the TCA9555.
+     */
     void update();
 
     bool input_1()  const { return _inputs & (1 << 0); }  // P00
