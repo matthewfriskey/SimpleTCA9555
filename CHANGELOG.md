@@ -2,6 +2,11 @@
 
 All notable changes to the `SimpleTCA9555` library will be documented in this file.
 
+## [1.1.1] - 2025-02-20
+
+### Changed
+- Minor updates to documentation.
+
 ## [1.1.0] - 2025-02-20
 
 ### Added
