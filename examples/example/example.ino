@@ -3,12 +3,10 @@
 
 SimpleTCA9555 expander(0x20);
 
-#define reed_switch input_1   // P00
-#define door_sensor input_2   // P01
-#define button      input_3   // P02
-#define motion      input_9   // P10
-#define window      input_13  // P14
-#define alarm       input_16  // P17
+// Named input wrappers
+inline bool reed_switch() { return expander.input_1(); }
+inline bool door_sensor() { return expander.input_2(); }
+inline bool button()      { return expander.input_3(); }
 
 void setup() {
     Serial.begin(115200);
@@ -18,22 +16,22 @@ void setup() {
 void loop() {
     expander.update(); // Refresh input states
 
-    if (reed_switch) {
+    if (reed_switch()) {
         Serial.println("Reed switch is HIGH");
     }
-    if (!door_sensor) {
+    if (!door_sensor()) {
         Serial.println("Door sensor is LOW");
     }
-    if (button) {
+    if (button()) {
         Serial.println("Button is pressed");
     }
-    if (motion) {
+    if (expander.input_9()) {
         Serial.println("Motion detected");
     }
-    if (window) {
+    if (expander.input_13()) {
         Serial.println("Window is open");
     }
-    if (alarm) {
+    if (expander.input_16()) { // Alarm
         Serial.println("Alarm triggered");
     }
     delay(500);

@@ -18,18 +18,20 @@ A simple library for the TCA9555 I/O expander with optional interrupt-driven rea
 #include <SimpleTCA9555.h>
 
 SimpleTCA9555 expander(0x20);
-#define reed_switch input_1
-#define window input_13
+
+// Named input wrappers
+inline bool reed_switch() { return expander.input_1(); }
+inline bool door_sensor() { return expander.input_2(); }
 
 void setup() {
-    expander.begin(21, 22, 23, 400000); // SDA, SCL, INT pin, 400 kHz
+    expander.begin(21, 22, 23, 400000); // SDA, SCL, INT, clock speed
 }
 
 void loop() {
-    if (reed_switch) {
-        // Handle input
+    if (reed_switch()) {
+        // Handle reed switch
     }
-    if (window) {
-        // Handle window sensor
+    if (door_sensor()) {
+        // Handle door sensor
     }
 }
