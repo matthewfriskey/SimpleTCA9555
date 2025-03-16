@@ -2,6 +2,14 @@
 
 All notable changes to the `SimpleTCA9555` library will be documented in this file.
 
+## [2.1.0] - 2025-02-20
+### Added
+- **Raw Input State Access**: Added `getInputs()` method to return the 16-bit state of all inputs as a `uint16_t`. This enables advanced handling like `switch` statements for multiple inputs.
+  - Example: `uint16_t state = expander.getInputs();`
+
+### Notes
+- This is a minor update adding new functionality without breaking existing `2.0.0` code. The variable-based interface (`input_1` to `input_16`) remains unchanged.
+
 ## [2.0.0] - 2025-02-20
 
 ### Changed
